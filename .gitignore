@@ -1,0 +1,8 @@
+.alpackages/
+.alcache/
+.snapshots/
+.altestrunner/
+*.app
+rad.json
+.DS_Store
+.vscode/launch.json
