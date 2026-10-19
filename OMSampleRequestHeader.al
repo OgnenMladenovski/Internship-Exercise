@@ -2,6 +2,8 @@ table 50001 "OM Sample Request Header"
 {
     Caption = 'Sample Request Header';
     DataClassification = CustomerContent;
+    DrillDownPageId = "OM Sample Requests";
+    LookupPageId = "OM Sample Requests";
 
     fields
     {
