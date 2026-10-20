@@ -2,11 +2,11 @@ pageextension 50002 "OM Customer Card" extends "Customer Card"
 {
     layout
     {
-        addfirst(factboxes)
+        addfirst(factboxes) //Go dodava Factboxot desno 
         {
             part(OMCustomerSamples; "OM Customer Samples FactBox")
             {
-                ApplicationArea = All;
+                ApplicationArea = All; //Na page extension ne mozhe da se dodade ova pogore vo kodot, mora za sekoj part posebno
                 SubPageLink = "No." = field("No.");
             }
         }
@@ -14,11 +14,11 @@ pageextension 50002 "OM Customer Card" extends "Customer Card"
 
     actions
     {
-        addlast(navigation)
+        addlast(navigation) //Related menito
         {
-            action(OMSampleRequests)
+            action(OMSampleRequests) //Ja otvara listata na requests za toj customer
             {
-                ApplicationArea = All;
+                ApplicationArea = All; //Na page extension ne mozhe da se dodade ova pogore vo kodot, mora za sekoja akcija posebno
                 Caption = 'Sample Requests';
                 ToolTip = 'View the sample requests for this customer.';
                 Image = List;
@@ -26,11 +26,11 @@ pageextension 50002 "OM Customer Card" extends "Customer Card"
                 RunPageLink = "Customer No." = field("No.");
             }
         }
-        addlast(creation)
+        addlast(creation) //New Document menito
         {
-            action(OMNewSampleRequest)
+            action(OMNewSampleRequest) //Kreira nov request za toj customer
             {
-                ApplicationArea = All;
+                ApplicationArea = All; //Na page extension ne mozhe da se dodade ova pogore vo kodot, mora za sekoja akcija posebno
                 Caption = 'New Sample Request';
                 ToolTip = 'Create a new sample request for this customer.';
                 Image = NewDocument;

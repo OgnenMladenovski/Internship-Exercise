@@ -4,7 +4,7 @@ page 50000 "OM Sample Requests"
     PageType = List;
     SourceTable = "OM Sample Request Header";
     CardPageId = "OM Sample Request";
-    UsageCategory = Lists;
+    UsageCategory = Lists; //So ova mozhe da se prebaruva na search bar
     ApplicationArea = All;
     Editable = false;
 
@@ -20,11 +20,11 @@ page 50000 "OM Sample Requests"
                 }
                 field("Customer No."; Rec."Customer No.")
                 {
-                    ToolTip = 'Specifies the customer.';
+                    ToolTip = 'Specifies the customers number.';
                 }
                 field("Customer Name"; Rec."Customer Name")
                 {
-                    ToolTip = 'Specifies the customer name.';
+                    ToolTip = 'Specifies the name of the customer.';
                 }
                 field("Request Date"; Rec."Request Date")
                 {
@@ -32,11 +32,11 @@ page 50000 "OM Sample Requests"
                 }
                 field(Status; Rec.Status)
                 {
-                    ToolTip = 'Specifies the status.';
+                    ToolTip = 'Specifies the status of the request.';
                 }
                 field("Total Amount"; Rec."Total Amount")
                 {
-                    ToolTip = 'Specifies the total amount.';
+                    ToolTip = 'Specifies the total amount of the request.';
                 }
             }
         }

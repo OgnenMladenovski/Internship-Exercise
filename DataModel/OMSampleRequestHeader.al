@@ -2,8 +2,8 @@ table 50001 "OM Sample Request Header"
 {
     Caption = 'Sample Request Header';
     DataClassification = CustomerContent;
-    DrillDownPageId = "OM Sample Requests";
-    LookupPageId = "OM Sample Requests";
+    DrillDownPageId = "OM Sample Requests"; //Otvara lista na requests koi gi ispolnuvaat uslovite od FlowFieldot vo OMCustomer.al
+    LookupPageId = "OM Sample Requests"; //Otvara lista na koja shto se izbirat requests
 
     fields
     {

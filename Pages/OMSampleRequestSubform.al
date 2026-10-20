@@ -3,8 +3,9 @@ page 50002 "OM Sample Request Subform"
     Caption = 'Lines';
     PageType = ListPart;
     SourceTable = "OM Sample Request Line";
-    AutoSplitKey = true;
-    DelayedInsert = true;
+    AutoSplitKey = true; //Avtomatski dodava Line No. na nov red
+    DelayedInsert = true; //Se zachuvuva redot samo koga kje e celosno popolnet
+    ApplicationArea = All;
 
     layout
     {
@@ -14,32 +15,26 @@ page 50002 "OM Sample Request Subform"
             {
                 field("Item No."; Rec."Item No.")
                 {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the item.';
+                    ToolTip = 'Specifies the item number.';
                 }
                 field(Description; Rec.Description)
                 {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the item description.';
+                    ToolTip = 'Specifies the items description.';
                 }
                 field("Unit of Measure Code"; Rec."Unit of Measure Code")
                 {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the unit of measure.';
+                    ToolTip = 'Specifies the unit of measure for that item.';
                 }
                 field(Quantity; Rec.Quantity)
                 {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the quantity.';
+                    ToolTip = 'Specifies the quantity of the item.';
                 }
                 field("Unit Price"; Rec."Unit Price")
                 {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the unit price.';
+                    ToolTip = 'Specifies the price of one unit.';
                 }
                 field("Line Amount"; Rec."Line Amount")
                 {
-                    ApplicationArea = All;
                     ToolTip = 'Specifies the line amount.';
                 }
             }
