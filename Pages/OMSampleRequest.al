@@ -98,11 +98,118 @@ page 50001 "OM Sample Request"
         }
     }
 
+    actions //6te akcii za menuvanje na statusot na requestot (Submit, Approve, Reject, Mark as Shipped, Cancel, Reopen)
+    {
+        area(Processing)
+        {
+            action(Submit)
+            {
+                Caption = 'Submit';
+                ToolTip = 'Submit the request for approval.';
+                Image = SendApprovalRequest;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                begin
+                    SampleRequestMgt.Submit(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+
+            action(Approve)
+            {
+                Caption = 'Approve';
+                ToolTip = 'Approve the request.';
+                Image = Approve;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                begin
+                    SampleRequestMgt.Approve(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+
+            action(Reject)
+            {
+                Caption = 'Reject';
+                ToolTip = 'Reject the request with a reason.';
+                Image = Reject;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    InputDialog: Page "OM Sample Request Input";
+                    RejectionReasonLbl: Label 'Rejection Reason';
+                begin
+                    InputDialog.SetDialogCaption(RejectionReasonLbl);
+                    if InputDialog.RunModal() = Action::OK then
+                        SampleRequestMgt.Reject(Rec, InputDialog.GetInputValue());
+                    CurrPage.Update(false);
+                end;
+            }
+
+            action(MarkAsShipped)
+            {
+                Caption = 'Mark as Shipped';
+                ToolTip = 'Mark the request as shipped with a tracking number.';
+                Image = Shipment;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    InputDialog: Page "OM Sample Request Input";
+                    TrackingNoLbl: Label 'Tracking No.';
+                begin
+                    InputDialog.SetDialogCaption(TrackingNoLbl);
+                    if InputDialog.RunModal() = Action::OK then
+                        SampleRequestMgt.MarkAsShipped(Rec, CopyStr(InputDialog.GetInputValue(), 1, MaxStrLen(Rec."Tracking No.")));
+                    CurrPage.Update(false);
+                end;
+            }
+
+            action(Cancel)
+            {
+                Caption = 'Cancel';
+                ToolTip = 'Cancel the request.';
+                Image = Cancel;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                begin
+                    SampleRequestMgt.Cancel(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+
+            action(Reopen)
+            {
+                Caption = 'Reopen';
+                ToolTip = 'Reopen the request so it can be changed.';
+                Image = ReOpen;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                begin
+                    SampleRequestMgt.Reopen(Rec);
+                    CurrPage.Update(false);
+                end;
+            }
+        }
+    }
+
     trigger OnAfterGetCurrRecord()
     begin
         IsOpen := Rec.Status = Rec.Status::Open;
     end;
 
     var
+        SampleRequestMgt: Codeunit "OM Sample Request Mgt.";
         IsOpen: Boolean;
 }

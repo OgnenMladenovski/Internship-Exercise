@@ -26,8 +26,13 @@ table 50002 "OM Sample Request Line"
             trigger OnValidate()
             var
                 Item: Record Item;
+                ItemNotAllowedErr: Label 'Item %1 is not allowed for samples or is blocked.', Comment = '%1 = Item number';
             begin
+                TestStatusOpen();
                 Item.Get("Item No.");
+                //R2 - Artiklot mora da e Simple Allowed i da ne e blokiran
+                if (not Item."OM Sample Allowed") or Item.Blocked then
+                    Error(ItemNotAllowedErr, "Item No.");
                 Description := Item.Description;
                 "Unit of Measure Code" := Item."Base Unit of Measure";
                 "Unit Price" := Item."Unit Price";
@@ -60,8 +65,10 @@ table 50002 "OM Sample Request Line"
                 SampleRequestSetup: Record "OM Sample Request Setup";
                 MaxQuantity: Decimal;
             begin
+                TestStatusOpen();
                 TestField("Item No.");
                 Item.Get("Item No.");
+                //R3 - Proverka dali kolichinata e validna i go presmetuva iznosot
                 MaxQuantity := Item."OM Max. Sample Qty.";
                 if MaxQuantity = 0 then begin
                     SampleRequestSetup.Get();
@@ -96,6 +103,31 @@ table 50002 "OM Sample Request Line"
             SumIndexFields = "Line Amount";
         }
     }
+
+    //R12 - Liniite mozhat da se dodavaat, menuvaat i brishat samo ako requestot e Open
+    trigger OnInsert()
+    begin
+        TestStatusOpen();
+    end;
+
+    trigger OnModify()
+    begin
+        TestStatusOpen();
+    end;
+
+    trigger OnDelete()
+    begin
+        TestStatusOpen();
+    end;
+
+    //Ja povikuva proverkata od Header za requestot na ovaa linija
+    local procedure TestStatusOpen()
+    var
+        SampleRequestHeader: Record "OM Sample Request Header";
+    begin
+        SampleRequestHeader.Get("Document No.");
+        SampleRequestHeader.TestStatusOpen();
+    end;
 
     var
         QuantityErr: Label 'Quantity must be above 0 and at most %1.', Comment = '%1 = Maximum sample quantity';

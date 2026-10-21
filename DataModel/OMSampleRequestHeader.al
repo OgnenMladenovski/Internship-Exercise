@@ -36,6 +36,8 @@ table 50001 "OM Sample Request Header"
             var
                 Customer: Record Customer;
             begin
+                //R12 - Dozvolena promena samo ako requestot e Open
+                TestStatusOpen();
                 if ("Customer No." <> xRec."Customer No.") and LinesExist() then
                     Error(CannotChangeCustomerErr, "No.");
                 if "Customer No." = '' then begin
@@ -64,6 +66,8 @@ table 50001 "OM Sample Request Header"
             var
                 MailManagement: Codeunit "Mail Management";
             begin
+                //R12 - Dozvolena promena samo ako requestot e Open
+                TestStatusOpen();
                 if "Contact E-mail" <> '' then
                     MailManagement.CheckValidEmailAddress("Contact E-mail");
             end;
@@ -72,6 +76,12 @@ table 50001 "OM Sample Request Header"
         {
             Caption = 'Project';
             DataClassification = CustomerContent;
+
+            //R12 - Dozvolena promena samo ako requestot e Open
+            trigger OnValidate()
+            begin
+                TestStatusOpen();
+            end;
         }
         field(6; "Request Date"; Date)
         {
@@ -173,6 +183,19 @@ table 50001 "OM Sample Request Header"
         "Requested By" := CopyStr(UserId(), 1, MaxStrLen("Requested By"));
     end;
 
+    //R13 - Brishenje samo na Open ili Cancelled requests so liniite
+    trigger OnDelete()
+    var
+        SampleRequestLine: Record "OM Sample Request Line";
+        CannotDeleteErr: Label 'Only Open or Cancelled requests can be deleted.';
+    begin
+        if not (Status in [Status::Open, Status::Cancelled]) then
+            Error(CannotDeleteErr);
+
+        SampleRequestLine.SetRange("Document No.", "No.");
+        SampleRequestLine.DeleteAll(false);
+    end;
+
     var
         CannotChangeCustomerErr: Label 'Request %1 has lines. Delete them to change the customer.', Comment = '%1 = Sample request number';
         CustomerBlockedErr: Label 'Customer %1 is blocked. Choose another customer.', Comment = '%1 = Customer number';
@@ -196,5 +219,11 @@ table 50001 "OM Sample Request Header"
     begin
         if Customer.Blocked <> Customer.Blocked::" " then
             Error(CustomerBlockedErr, Customer."No.");
+    end;
+
+    //R12 - Dozvoluva promena samo dokolku requestot e Open
+    procedure TestStatusOpen()
+    begin
+        TestField(Status, Status::Open);
     end;
 }
