@@ -53,6 +53,7 @@ page 50000 "OM Sample Requests"
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = Report;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 var

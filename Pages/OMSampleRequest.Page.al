@@ -109,6 +109,7 @@ page 50001 "OM Sample Request"
                 Image = SendApprovalRequest;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 begin
@@ -124,6 +125,7 @@ page 50001 "OM Sample Request"
                 Image = Approve;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 begin
@@ -139,6 +141,7 @@ page 50001 "OM Sample Request"
                 Image = Reject;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -159,6 +162,7 @@ page 50001 "OM Sample Request"
                 Image = Shipment;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -179,6 +183,7 @@ page 50001 "OM Sample Request"
                 Image = Cancel;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 begin
@@ -194,6 +199,7 @@ page 50001 "OM Sample Request"
                 Image = ReOpen;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 begin
@@ -209,6 +215,7 @@ page 50001 "OM Sample Request"
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = Report;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 var

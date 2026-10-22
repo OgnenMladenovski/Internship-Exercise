@@ -3,7 +3,7 @@ page 50003 "OM Sample Request Setup"
     Caption = 'Sample Request Setup';
     PageType = Card;
     SourceTable = "OM Sample Request Setup";
-    UsageCategory = Administration; //Se naogja vo prebaruvanjeto pod kategorija Administration 
+    UsageCategory = Administration; //Se naogja vo prebaruvanjeto pod kategorija Administration
     ApplicationArea = All;
     InsertAllowed = false;
     DeleteAllowed = false;

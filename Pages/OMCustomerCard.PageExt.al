@@ -2,7 +2,7 @@ pageextension 50002 "OM Customer Card" extends "Customer Card"
 {
     layout
     {
-        addfirst(factboxes) //Go dodava Factboxot desno 
+        addfirst(factboxes) //Go dodava Factboxot desno
         {
             part(OMCustomerSamples; "OM Customer Samples FactBox")
             {

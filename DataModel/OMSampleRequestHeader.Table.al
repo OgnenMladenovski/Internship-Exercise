@@ -20,7 +20,7 @@ table 50001 "OM Sample Request Header"
             begin
                 if "No." <> xRec."No." then begin
                     SampleRequestSetup.Get();
-                    NoSeries.TestManual(SampleRequestSetup."Sample Request Nos."); //Pokazhuva Error 
+                    NoSeries.TestManual(SampleRequestSetup."Sample Request Nos."); //Pokazhuva Erro
                     "No. Series" := '';
                 end;
             end;
