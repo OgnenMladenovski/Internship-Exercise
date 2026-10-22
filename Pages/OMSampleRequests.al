@@ -41,4 +41,28 @@ page 50000 "OM Sample Requests"
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(Print)
+            {
+                Caption = 'Print';
+                ToolTip = 'Print the selected sample requests.';
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    SampleRequest: Record "OM Sample Request Header";
+                    SampleRequestMgt: Codeunit "OM Sample Request Mgt.";
+                begin
+                    CurrPage.SetSelectionFilter(SampleRequest); //Gi zema site selektirani requesti
+                    SampleRequestMgt.PrintSampleRequests(SampleRequest);
+                end;
+            }
+        }
+    }
 }

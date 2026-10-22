@@ -26,6 +26,7 @@ pageextension 50003 "OM Customer List" extends "Customer List"
                 RunPageLink = "Customer No." = field("No.");
             }
         }
+
         addlast(creation) //New Document menito
         {
             action(OMNewSampleRequest) //Kreira nov request za izbraniot customer
@@ -41,6 +42,13 @@ pageextension 50003 "OM Customer List" extends "Customer List"
                 begin
                     SampleRequestMgt.CreateForCustomer(Rec);
                 end;
+            }
+        }
+
+        addlast(Category_Category5) //Ova go dodadov za New Sample Request da e promoted vo lentata New Document
+        {
+            actionref(OMNewSampleRequest_Promoted; OMNewSampleRequest)
+            {
             }
         }
     }

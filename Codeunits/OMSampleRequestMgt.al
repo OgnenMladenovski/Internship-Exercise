@@ -171,4 +171,10 @@ codeunit 50000 "OM Sample Request Mgt."
         SampleRequest."Approved Date" := 0D;
         SetStatus(SampleRequest, SampleRequest.Status::Open);
     end;
+
+    //Go izvrshuva reportot za requestot
+    procedure PrintSampleRequests(var SampleRequest: Record "OM Sample Request Header")
+    begin
+        Report.Run(Report::"OM Sample Request", true, false, SampleRequest);
+    end;
 }

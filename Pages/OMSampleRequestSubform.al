@@ -28,6 +28,11 @@ page 50002 "OM Sample Request Subform"
                 field(Quantity; Rec.Quantity)
                 {
                     ToolTip = 'Specifies the quantity of the item.';
+
+                    trigger OnValidate()
+                    begin
+                        CurrPage.Update(true); //Live update na Total Amount
+                    end;
                 }
                 field("Unit Price"; Rec."Unit Price")
                 {

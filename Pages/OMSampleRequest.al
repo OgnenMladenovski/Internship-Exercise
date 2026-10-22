@@ -98,7 +98,7 @@ page 50001 "OM Sample Request"
         }
     }
 
-    actions //6te akcii za menuvanje na statusot na requestot (Submit, Approve, Reject, Mark as Shipped, Cancel, Reopen)
+    actions //6te akcii za menuvanje na statusot na requestot (Submit, Approve, Reject, Mark as Shipped, Cancel, Reopen) + 7ma akcija Print za printanje na requestot
     {
         area(Processing)
         {
@@ -199,6 +199,24 @@ page 50001 "OM Sample Request"
                 begin
                     SampleRequestMgt.Reopen(Rec);
                     CurrPage.Update(false);
+                end;
+            }
+
+            action(Print)
+            {
+                Caption = 'Print';
+                ToolTip = 'Print the sample request.';
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    SampleRequest: Record "OM Sample Request Header";
+                begin
+                    SampleRequest := Rec;
+                    SampleRequest.SetRecFilter();
+                    SampleRequestMgt.PrintSampleRequests(SampleRequest);
                 end;
             }
         }
