@@ -6,7 +6,7 @@ codeunit 50001 "OM Sample Request Subscribers"
     var
         SampleRequestLine: Record "OM Sample Request Line";
         SampleRequestHeader: Record "OM Sample Request Header";
-        ItemOnRequestErr: Label 'Item %1 cannot be deleted because it is on sample request %2.', Comment = '%1 = Item number, %2 = Sample request number';
+        ItemOnRequestErr: Label 'Item %1 cannot be deleted because it is on sample request %2. Cancel or ship the request first.', Comment = '%1 = Item number, %2 = Sample request number';
     begin
         if Rec.IsTemporary() then
             exit;
@@ -25,7 +25,7 @@ codeunit 50001 "OM Sample Request Subscribers"
     local procedure CustomerOnBeforeDelete(var Rec: Record Customer)
     var
         SampleRequestHeader: Record "OM Sample Request Header";
-        CustomerOnRequestErr: Label 'Customer %1 cannot be deleted because it is on sample request %2.', Comment = '%1 = Customer number, %2 = Sample request number';
+        CustomerOnRequestErr: Label 'Customer %1 cannot be deleted because it is on sample request %2. Cancel or ship the request first.', Comment = '%1 = Customer number, %2 = Sample request number';
     begin
         if Rec.IsTemporary() then
             exit;

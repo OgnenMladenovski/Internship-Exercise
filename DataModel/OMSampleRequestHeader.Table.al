@@ -187,7 +187,7 @@ table 50001 "OM Sample Request Header"
     trigger OnDelete()
     var
         SampleRequestLine: Record "OM Sample Request Line";
-        CannotDeleteErr: Label 'Only Open or Cancelled requests can be deleted.';
+        CannotDeleteErr: Label 'Only Open or Cancelled requests can be deleted. Cancel the request first.';
     begin
         if not (Status in [Status::Open, Status::Cancelled]) then
             Error(CannotDeleteErr);

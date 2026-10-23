@@ -45,7 +45,7 @@ codeunit 50000 "OM Sample Request Mgt."
         OtherSampleRequest: Record "OM Sample Request Header";
         FromDate: Date;
         NoLinesErr: Label 'Add at least one line before you submit.';
-        TooManyRequestsErr: Label 'Customer already has %1 requests since %2.', Comment = '%1 = Number of requests, %2 = Start date';
+        TooManyRequestsErr: Label 'Customer already has %1 requests since %2. Wait or cancel an older request.', Comment = '%1 = Number of requests, %2 = Start date';
     begin
         SampleRequest.TestField(Status, SampleRequest.Status::Open);
 
@@ -82,8 +82,8 @@ codeunit 50000 "OM Sample Request Mgt."
     //Odobruvanje na requestot (So proverka na R7)
     procedure Approve(var SampleRequest: Record "OM Sample Request Header")
     var
-        OwnRequestErr: Label 'You cannot approve your own request.';
-        LimitTooLowErr: Label 'The amount is above your approval limit.';
+        OwnRequestErr: Label 'You cannot approve your own request. Ask another user to approve it.';
+        LimitTooLowErr: Label 'The amount is above your approval limit. Ask a user with a higher limit.';
     begin
         //R7 - Proverka dali requestot ima status Pending Approval
         SampleRequest.TestField(Status, SampleRequest.Status::"Pending Approval");
@@ -103,8 +103,8 @@ codeunit 50000 "OM Sample Request Mgt."
     //Odbivanje na requestot (So proverka na R7 i R8)
     procedure Reject(var SampleRequest: Record "OM Sample Request Header"; RejectionReason: Text[250])
     var
-        OwnRequestErr: Label 'You cannot reject your own request.';
-        LimitTooLowErr: Label 'The amount is above your approval limit.';
+        OwnRequestErr: Label 'You cannot reject your own request. Ask another user to reject it.';
+        LimitTooLowErr: Label 'The amount is above your approval limit. Ask a user with a higher limit.';
         ReasonRequiredErr: Label 'Enter a rejection reason.';
     begin
         //R7 - Proverka dali requestot ima status Pending Approval

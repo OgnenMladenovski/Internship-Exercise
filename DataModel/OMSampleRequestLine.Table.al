@@ -26,7 +26,7 @@ table 50002 "OM Sample Request Line"
             trigger OnValidate()
             var
                 Item: Record Item;
-                ItemNotAllowedErr: Label 'Item %1 is not allowed for samples or is blocked.', Comment = '%1 = Item number';
+                ItemNotAllowedErr: Label 'Item %1 is not allowed for samples or is blocked. Choose another item.', Comment = '%1 = Item number';
             begin
                 TestStatusOpen();
                 Item.Get("Item No.");
